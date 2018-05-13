@@ -167,10 +167,10 @@ function collectDOMStat(root) {
             } 
             
             if (elem.childNodes[i].nodeType === 1) {
-                if (statistic.tags[elem.childNodes.tagName]) {
-                    statistic.tags[elem.childNodes.tagName]++;
+                if (statistic.tags[elem.childNodes[i].tagName]) {
+                    statistic.tags[elem.childNodes[i].tagName]++;
                 } else {
-                    statistic.tags[elem.childNodes.tagName] = 1;
+                    statistic.tags[elem.childNodes[i].tagName] = 1;
                 }
 
                 for (const el of elem.childNodes[i].classList) {
