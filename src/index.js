@@ -24,7 +24,7 @@ function createDivWithText(text) {
  Функция должна вставлять элемент, переданный в переметре what в начало элемента, переданного в параметре where
 
  Пример:
-   prepend(document.querySelector('#one'), document.querySelector('#two')) // добавит элемент переданный первым аргументом в начало элемента переданного вторым аргументом
+ prepend(document.querySelector('#one'), document.querySelector('#two')) // добавит элемент переданный первым аргументом в начало элемента переданного вторым аргументом
  */
 function prepend(what, where) {
     where.insertBefore(what, where.firstChild);
@@ -223,6 +223,25 @@ function collectDOMStat(root) {
    }
  */
 function observeChildNodes(where, fn) {
+    let observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+
+            if (mutation.addedNodes.length > 0) {
+                fn({
+                    'type': 'insert',
+                    'nodes': [... mutation.addedNodes]
+                });
+            }
+            if (mutation.removedNodes.length > 0) {
+                fn({
+                    'type': 'remove',
+                    'nodes': [...mutation.removedNodes]
+                });
+            }
+        });
+    });
+
+    observer.observe(where, { childList: true, subtree: true });
 }
 
 export {
