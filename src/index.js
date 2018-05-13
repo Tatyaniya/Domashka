@@ -228,14 +228,14 @@ function observeChildNodes(where, fn) {
 
             if (mutation.addedNodes.length > 0) {
                 fn({
-                    'type': 'insert',
-                    'nodes': [... mutation.addedNodes]
+                    type: 'insert',
+                    nodes: [... mutation.addedNodes]
                 });
             }
             if (mutation.removedNodes.length > 0) {
                 fn({
-                    'type': 'remove',
-                    'nodes': [...mutation.removedNodes]
+                    type: 'remove',
+                    nodes: [...mutation.removedNodes]
                 });
             }
         });
