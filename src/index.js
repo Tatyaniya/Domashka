@@ -170,16 +170,17 @@ function collectDOMStat(root) {
                 if (statistic.tags[elem.childNodes.tagName]) {
                     statistic.tags[elem.childNodes.tagName]++;
                 } else {
-                    statistic.tags[elem.childNodes.tagName] = 1
+                    statistic.tags[elem.childNodes.tagName] = 1;
                 }
 
                 for (const el of elem.childNodes[i].classList) {
                     if (statistic.classes[el]) {
-                        statistic.classes[el]++
+                        statistic.classes[el]++;
                     } else {
-                        statistic.classes[el] = 1
+                        statistic.classes[el] = 1;
                     }
                 }
+                collections(elem.childNodes[i]);
             }
         }
     }
