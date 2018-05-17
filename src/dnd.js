@@ -30,17 +30,17 @@ function createDiv() {
     let div = document.createElement('div'),
         size = () => Math.floor(Math.random() * 300 + 50),
         randomColor = () => Math.floor(Math.random() * 255),
-        left = () => Math.floor(Math.random() * (window.innerWidth - size)),
-        top = () => Math.floor(Math.random() * (window.innerHeight - size));
+        left = () => Math.floor(Math.random() * (window.innerWidth - size())),
+        top = () => Math.floor(Math.random() * (window.innerHeight - size()));
 
     div.classList.add('draggable-div');
     
     div.setAttribute('style',
                     `width:${size()}px;
                     height:${size()}px;
+                    position: absolute;
                     left:${left()}px;
                     top:${top()}px;
-                    position: absolute;
                     background-color:rgb(${randomColor()},${randomColor()},${randomColor()}`
                 );
 
