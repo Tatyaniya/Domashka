@@ -56,6 +56,25 @@ function createDiv() {
    addListeners(newDiv);
  */
 function addListeners(target) {
+    target.onmousedown = function (e) {
+        move(e);
+
+        target.style.zIndex = 100;
+
+        function move(e) {
+            target.style.left = e.pageX - target.offsetWidth/2 +'px';
+            target.style.top = e.pageY - target.offsetHeight/2 +'px';
+        }
+
+        document.onmousemove = function(e) {
+            move(e);
+        }
+
+        target.onmouseup = function() {
+            document.onmousemove = null;
+            target.onmouseup = null;
+        }
+    }
 }
 
 let addDivButton = homeworkContainer.querySelector('#addDiv');
