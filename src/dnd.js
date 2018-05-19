@@ -34,15 +34,14 @@ function createDiv() {
         top = () => Math.floor(Math.random() * (window.innerHeight - size()));
 
     div.classList.add('draggable-div');
-    
-    div.setAttribute('style',
-                    `width:${size()}px;
-                    height:${size()}px;
-                    position: absolute;
-                    left:${left()}px;
-                    top:${top()}px;
-                    background-color:rgb(${randomColor()},${randomColor()},${randomColor()}`
-                );
+
+    div.setAttribute('style', 
+        `width:${size()}px;
+        height:${size()}px;
+        position: absolute;
+        left:${left()}px;
+        top:${top()}px;
+        background-color: rgb(${randomColor()},${randomColor()},${randomColor()}`);
 
     return div;
 }
