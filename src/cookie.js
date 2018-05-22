@@ -95,3 +95,8 @@ function WriteCookie(name, value) {
     return tr;
 }
 
+// удаление куки
+function DeleteCookie() {
+    document.cookie = `${name}="";expires=${new Date(0).toUTCString()}`;
+}
+
