@@ -49,41 +49,49 @@ filterNameInput.addEventListener('keyup', function() {
 
 addButton.addEventListener('click', () => {
     // здесь можно обработать нажатие на кнопку "добавить cookie"
-    document.cookie = `${addNameInput.value} = ${addValueInput.value}`;
-  
-    addNameInput.value = '';
-    addValueInput.value = '';
+    createCookie(addNameInput.value, addValueInput.value);
 });
 
-// получить объект из строки с куки
-function ObjCookie() {
-    document.cookie.split('; ').reduce((prev, current) => {
-        const [name, value] = current.split('=');
+// создать куки
+function createCookie(name, value) {
+    document.cookie = `${name} = ${value}`;
 
-        prev[name] = value;
+    addNameInput.value = '';
+    addValueInput.value = '';
+}
 
-        return prev;
-    }, {});
+// получение кук
+function getCookies() {
+    return document.cookie
+        .split('; ')
+        .filter(Boolean)
+        .map(cookie => cookie.match(/^([^=]+)=(.+)/))
+        .reduce((obj, [, name, value]) => {
+            obj[name] = value;
+
+            return obj;
+        }, {});
 }
 
 // записать куку
 function WriteCookie(name, value) {
-    let tr = document.createElement('tr'),
-        tdName = document.createElement('td'),
-        tdValue = document.createElement('td'),
-        tdDel = document.createElement('td'),
+    let tr = document.createElement('TR'),
+        tdName = document.createElement('TD'),
+        tdValue = document.createElement('TD'),
+        tdDel = document.createElement('TD'),
         buttonDel = document.createElement('button');
 
-    buttonDel.innerHTML = 'удалить';
-    buttonDel.setAttribute('cookie', name);
-
-    tdName.innerHTML = name;
-    tdValue.innerHTML = value;
-    tdDel.appendChild(buttonDel);
+    listTable.appendChild(tr);
     tr.appendChild(tdName);
     tr.appendChild(tdValue);
     tr.appendChild(tdDel);
+    tdDel.appendChild(buttonDel);
 
-    listTable.appendChild(tr);
+    tdName.innerHTML = name;
+    tdValue.innerHTML = value;
+    buttonDel.innerHTML = 'удалить';
+    buttonDel.setAttribute('cookie', name);
+
+    return tr;
 }
 
