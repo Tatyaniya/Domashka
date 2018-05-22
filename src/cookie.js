@@ -49,15 +49,19 @@ filterNameInput.addEventListener('keyup', function() {
 
 addButton.addEventListener('click', () => {
     // здесь можно обработать нажатие на кнопку "добавить cookie"
-    createCookie(addNameInput.value, addValueInput.value);
+    createCookie();
 });
 
 // создать куки
-function createCookie(name, value) {
-    document.cookie = `${name} = ${value}`;
+function createCookie() {
+    let name = addNameInput.value,
+        value = addValueInput.value;
 
-    addNameInput.value = '';
-    addValueInput.value = '';
+    if (name === '' || value === '') {
+        return;
+    }
+
+    return document.cookie = `${name} = ${value}`;
 }
 
 // получение кук
