@@ -55,8 +55,11 @@ addButton.addEventListener('click', () => {
 
 listTable.addEventListener('click', function(e) {
     if (e.target.tagName === 'BUTTON') {
-        DeleteCookie(e.target.getAttribute('cookie'));
-        makeTable();
+        let tr = e.target.closest('tr'),
+            name = e.target.getAttribute('coolie');
+
+        DeleteCookie(name);
+        listTable.removeChild(tr);        
     }
 })
 
@@ -121,11 +124,12 @@ function isMatching(full, chunk) {
     return false;    
 }
 
+let cookies = getCookies();// положить сюда все куки
+
 // записать в таблицу
 function makeTable() {
-    let chunk = filterNameInput.value,
-        cookies = getCookies();// положить сюда все куки
-
+    let chunk = filterNameInput.value;
+    
     listTable.innerHTML = '';
 
     if (cookies) {
@@ -137,3 +141,5 @@ function makeTable() {
     }
 
 }
+
+WriteCookie(cookies);
