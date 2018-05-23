@@ -45,12 +45,13 @@ const listTable = homeworkContainer.querySelector('#list-table tbody');
 
 filterNameInput.addEventListener('keyup', function() {
     // здесь можно обработать нажатия на клавиши внутри текстового поля для фильтрации cookie
-    makeTable();
+    showCookie();
 });
 
 addButton.addEventListener('click', () => {
     // здесь можно обработать нажатие на кнопку "добавить cookie"
     createCookie(addNameInput.value, addValueInput.value);
+    showCookie();
 });
 
 // создать куки
@@ -75,8 +76,7 @@ function getCookies() {
         }, {});
 }
 
-// записать куку
-function WriteCookie(name, value) {
+function makeTable(name, value) {
     let tr = document.createElement('TR'),
         tdName = document.createElement('TD'),
         tdValue = document.createElement('TD'),
@@ -113,7 +113,7 @@ function isMatching(full, chunk) {
 }
 
 // записать в таблицу
-function makeTable() {
+function showCookie() {
     let chunk = filterNameInput.value;
     let cookies = getCookies();// положить сюда все куки
     
@@ -122,12 +122,12 @@ function makeTable() {
     if (cookies) {
         for (let name in cookies) {
             if (isMatching(name, chunk) || isMatching(cookies[name], chunk)) {
-                WriteCookie(name, cookies[name]);
+                makeTable(name, cookies[name]);
             }
         }
     }
 
 }
 
-WriteCookie();
 makeTable();
+showCookie();
