@@ -80,7 +80,6 @@ function getCookies() {
 
 // записать куку
 function WriteCookie(name, value) {
-    listTable.innerText = ''; // очистить поле для значений
     let tr = document.createElement('TR'),
         tdName = document.createElement('TD'),
         tdValue = document.createElement('TD'),
