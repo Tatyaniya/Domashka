@@ -49,7 +49,8 @@ filterNameInput.addEventListener('keyup', function() {
 
 addButton.addEventListener('click', () => {
     // здесь можно обработать нажатие на кнопку "добавить cookie"
-    createCookie();
+    createCookie(addNameInput.value, addValueInput.value);
+    makeTable();
 });
 
 // создать куки
@@ -79,6 +80,7 @@ function getCookies() {
 
 // записать куку
 function WriteCookie(name, value) {
+    listTable.innerText = ''; // очистить поле для значений
     let tr = document.createElement('TR'),
         tdName = document.createElement('TD'),
         tdValue = document.createElement('TD'),
@@ -104,3 +106,26 @@ function DeleteCookie() {
     document.cookie = `${name}="";expires=${new Date(0).toUTCString()}`;
 }
 
+// фильтрация. Встречается ли подстрока chunk в строке full
+function isMatching(full, chunk) {
+    if (full.toLowerCase().includes(chunk.toLowerCase())) {
+        return true;
+    }
+
+    return false;    
+}
+
+// записать в таблицу
+function makeTable() {
+    let chunk = filterNameInput.value,
+        cookies = getCookies();// положить сюда все куки
+
+    if (cookies) {
+        for (let name in cookies) {
+            if (isMatching(name, chunk) || isMatching(cookies[name], chunk)) {
+                WriteCookie(name, cookies[name]);
+            }
+        }
+    }
+
+}
