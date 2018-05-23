@@ -53,6 +53,12 @@ addButton.addEventListener('click', () => {
     makeTable();
 });
 
+listTable.addEventListener('click', function(e) {
+    if (e.target.tagName === 'BUTTON') {
+        DeleteCookie(e.target.getAttribute('cookie'));
+    }
+})
+
 // создать куки
 function createCookie() {
     let name = addNameInput.value,
