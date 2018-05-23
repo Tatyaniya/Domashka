@@ -55,10 +55,7 @@ addButton.addEventListener('click', () => {
 
 listTable.addEventListener('click', function(e) {
     if (e.target.tagName === 'BUTTON') {
-        console.log(e.target.getAttribute('cookie'));
         DeleteCookie(e.target.getAttribute('cookie'));
-        listTable.removeChild(listTable.childNodes(e.target));
-        console.log(listTable.childNodes(e.target));
         makeTable();
     }
 })
