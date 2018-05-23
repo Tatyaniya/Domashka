@@ -45,34 +45,21 @@ const listTable = homeworkContainer.querySelector('#list-table tbody');
 
 filterNameInput.addEventListener('keyup', function() {
     // здесь можно обработать нажатия на клавиши внутри текстового поля для фильтрации cookie
+    makeTable();
 });
 
 addButton.addEventListener('click', () => {
     // здесь можно обработать нажатие на кнопку "добавить cookie"
     createCookie(addNameInput.value, addValueInput.value);
-    makeTable();
 });
 
-listTable.addEventListener('click', function(e) {
-    if (e.target.tagName === 'BUTTON') {
-        let tr = e.target.closest('tr'),
-            name = e.target.getAttribute('coolie');
-
-        DeleteCookie(name);
-        listTable.removeChild(tr);        
-    }
-})
-
 // создать куки
-function createCookie() {
-    let name = addNameInput.value,
-        value = addValueInput.value;
-
+function createCookie(name, value) {
     if (name === '' || value === '') {
         return;
     }
 
-    return document.cookie = `${name} = ${value}`;
+    document.cookie = `${name}=${value}`;
 }
 
 // получение кук
@@ -107,12 +94,13 @@ function WriteCookie(name, value) {
     buttonDel.innerHTML = 'удалить';
     buttonDel.setAttribute('cookie', name);
 
-    return tr;
-}
-
-// удаление куки
-function DeleteCookie() {
-    document.cookie = `${name}="";expires=${new Date(0).toUTCString()}`;
+    // удалить куку
+    buttonDel.addEventListener('click', function() {
+        let tr = buttonDel.closest('tr');
+                
+        listTable.removeChild(tr);        
+        document.cookie = `${name}="";expires=${new Date(0).toUTCString()}`;
+    })
 }
 
 // фильтрация. Встречается ли подстрока chunk в строке full
@@ -142,3 +130,4 @@ function makeTable() {
 }
 
 WriteCookie();
+makeTable();
