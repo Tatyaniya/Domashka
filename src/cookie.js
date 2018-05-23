@@ -55,7 +55,11 @@ addButton.addEventListener('click', () => {
 
 listTable.addEventListener('click', function(e) {
     if (e.target.tagName === 'BUTTON') {
+        console.log(e.target.getAttribute('cookie'));
         DeleteCookie(e.target.getAttribute('cookie'));
+        listTable.removeChild(listTable.childNodes(e.target));
+        console.log(listTable.childNodes(e.target));
+        makeTable();
     }
 })
 
@@ -124,6 +128,8 @@ function isMatching(full, chunk) {
 function makeTable() {
     let chunk = filterNameInput.value,
         cookies = getCookies();// положить сюда все куки
+
+    listTable.innerHTML = '';
 
     if (cookies) {
         for (let name in cookies) {
