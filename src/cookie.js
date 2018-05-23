@@ -124,11 +124,10 @@ function isMatching(full, chunk) {
     return false;    
 }
 
-let cookies = getCookies();// положить сюда все куки
-
 // записать в таблицу
 function makeTable() {
     let chunk = filterNameInput.value;
+    let cookies = getCookies();// положить сюда все куки
     
     listTable.innerHTML = '';
 
@@ -142,4 +141,4 @@ function makeTable() {
 
 }
 
-WriteCookie(cookies);
+WriteCookie();
