@@ -120,11 +120,17 @@ function showCookie() {
     listTable.innerHTML = '';
 
     if (cookies) {
-        for (let name in cookies) {
+        // у объекта кук получаем ключи
+        Object.keys(cookies).forEach(item => {
+            if (isMatching(cookies[item], chunk) || isMatching(item, chunk)) { 
+                makeTable(item, cookies[item]);
+            }
+        });
+        /* for (let name in cookies) {
             if (isMatching(name, chunk) || isMatching(cookies[name], chunk)) {
                 makeTable(name, cookies[name]);
             }
-        }
+        } */
     }
 
 }
